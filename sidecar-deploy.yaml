@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-apps
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: api
+  labels:
+    app: api
+  namespace: my-apps
+spec:
+  containers:
+  - name: api
+    image: springio/api-app:latest
+    imagePullPolicy: Never
+  - name: proxy
+    image: springio/proxy:latest
+    imagePullPolicy: Never
+    ports:
+    - containerPort: 8081
